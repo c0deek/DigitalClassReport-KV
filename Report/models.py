@@ -19,9 +19,12 @@ class Record(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete = models.CASCADE)
     section = models.CharField(max_length = 3)
     subject = models.CharField(max_length = 20)
+    total_students = models.IntegerField(default = 0)
     no_students = models.IntegerField(default = 0)
     platform = models.CharField(max_length = 20)
+    topic = models.CharField(max_length = 200)
+    hw = models.TextField()
     date = models.DateField(default = timezone.now)
 
     def __str__(self):
-        return f"{self.date}: {self.teacher} {self.subject} {self.Class}"
+        return f"{self.date}: '{self.teacher}'\t'{self.subject}'\t'{self.Class}'\t'{self.section}'"
