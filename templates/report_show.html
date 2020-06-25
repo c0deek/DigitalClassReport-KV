@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% with data|first as first %}
+<h1>Digital Class Completion Report<br>Date: {{ first.date }}</h1>
+{% endwith %}
+<table>
+    <tr>
+        <th>Class</th>
+        <th>Section</th>
+        <th>Teacher</th>
+        <th>Subject</th>
+        <th>Total Students</th>
+        <th>Present</th>
+        <th>Platform</th>
+        <th>Topic</th>
+        <th>Homework</th>
+    </tr>
+{% for entry in data %} 
+    <tr>
+        <td>{{ entry.Class }}</td>
+        <td>{{ entry.section }}</td>
+        <td>{{ entry.teacher }}</td>
+        <td>{{ entry.subject }}</td>
+        <td>{{ entry.total_students }}</td>
+        <td>{{ entry.present }}</td>
+        <td>{{ entry.platform }}</td>
+        <td>{{ entry.topic }}</td>
+        <td>{{ entry.homework }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}

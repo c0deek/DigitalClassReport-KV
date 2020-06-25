@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+
+h1 {
+    text-align: center;
+}
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+button {
+    background-color: #212121;
+    height: 40px;
+    width: 200px;
+    margin: 0 10%;
+    border: black 2px solid;
+    border-radius: 5px;
+}
+
+nav {
+    display: block;
+    background-color: #701e20;
+    padding: 10px 20%;
+    margin: 0 auto 5% auto;
+    display: flex;
+}
+
+nav a {
+    display: inline;
+    width: 33.3vw;
+    margin: 0 0%;
+    font-size: 20px;
+    padding: 0;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.intro {
+    text-align: center;
+}
+
+.intro img {
+    display: block;
+    margin: 1% auto;
+    width: 250px;
+}
+
+.intro h1 {
+    margin-top: 5%;
+    font-size: 30px;
+}
+
+.intro h3 {
+    font-size: 20px;
+}
+
+form {
+    padding-left: 42%;
+}
+
+form label {
+    display: inline-block;
+    width: 5vw;
+}
+
+form input {
+    width: 200px;
+}
+
+form input[type="submit"] {
+    width: 150px;
+    height: 40px;
+    margin-left: 3vw;
+}
+
+table {
+    border-collapse: collapse;
+    width: 96%;
+    margin: 0 2%;
+    text-align: center;
+}
+
+th {
+    border-bottom: 2px #2f2f2f solid;
+}
+
+th, td {
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

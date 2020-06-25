@@ -20,10 +20,10 @@ class Record(models.Model):
     section = models.CharField(max_length = 3)
     subject = models.CharField(max_length = 20)
     total_students = models.IntegerField(default = 0)
-    no_students = models.IntegerField(default = 0)
+    present = models.IntegerField(default = 0)
     platform = models.CharField(max_length = 20)
     topic = models.CharField(max_length = 200)
-    hw = models.TextField()
+    homework = models.TextField()
     date = models.DateField(default = timezone.now)
 
     def __str__(self):

@@ -1,22 +1,24 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Digital Class Completion Report</title>
-    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
     <header>
         <nav>
-            <img src="https://1.bp.blogspot.com/-Y2Mqj01Rx7o/WIQaMix1MjI/AAAAAAAAFAY/HnvQGqbnbjMBeYINyo_c3fClBvZPPvv9ACLcB/s1600/kvs-logo.png">
-            <a href="">Submit Report</a>
-            <a href="">View Report</a>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'submit_report' %}">Submit Report</a>
+            <a href="{% url 'report_home' %}">View Report</a>
         </nav>
-        <img src="https://1.bp.blogspot.com/-Y2Mqj01Rx7o/WIQaMix1MjI/AAAAAAAAFAY/HnvQGqbnbjMBeYINyo_c3fClBvZPPvv9ACLcB/s1600/kvs-logo.png" alt="logo">
-        <h1>Kendriya Viduyala No.2, Armapur, Kanpur</h1>
-        <h3>Digital Classes Completion Report</h3>
     </header>
+
     {% block content %}
     {% endblock %}
+
+    <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
 </body>
 </html>

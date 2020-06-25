@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Enter the date</h1>
+<br><br>
+<form action="" method="get">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" id="date_submit">
+</form>
+
+{% endblock %}
