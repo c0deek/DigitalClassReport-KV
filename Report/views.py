@@ -2,8 +2,15 @@ from django.shortcuts import render, redirect
 from django import forms
 from django.views.generic import TemplateView, CreateView
 from django.urls import reverse_lazy
+from django.http import HttpResponse
+from django.core import serializers
+from django.conf import settings
+from modules import print_xl 
 
-from .models import Record
+import datetime
+import os
+
+from .models import Teacher, Record
 
 #Create your views here.
 class HomePageView(TemplateView):
@@ -44,3 +51,23 @@ def report_view(request):
     else:
         form = DateForm()
         return render(request, 'report_home.html', {'form': form})
+
+
+def download_report(request, year, month, day):
+    date = datetime.date(int(year), int(month), int(day))
+    data = list(Record.objects.filter(date = date))
+    for entry in data:
+        print(entry)
+
+    data_json = serializers.serialize('json', Record.objects.filter(date = date))
+    teachers_json = serializers.serialize('json', Teacher.objects.all())
+    print_xl.generate_xl(data_json, teachers_json)
+
+
+    file_path = os.path.join(settings.MEDIA_ROOT, 'report.xlsx')
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404

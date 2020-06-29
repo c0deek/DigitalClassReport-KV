@@ -1,8 +1,20 @@
-{% extends 'base.html' %}
+{% load static %}
 
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
 {% with data|first as first %}
-<h1>Digital Class Completion Report<br>Date: {{ first.date }}</h1>
+<div id = "report-header">
+    <a href="/report/download/{{ first.date|date:"Y/m/d" }}"><button>Download Excel</button></a>
+    <h1>Kendriya Vidyalaya No.2 Armapur<br>Digital Class Completion Report: {{ first.date }}</h1>
+    <a href="{% url 'report_home' %}"><i class="fa fa-times" aria-hidden="true"></i></a>
+</div>
 {% endwith %}
 <table>
     <tr>
@@ -31,4 +43,5 @@
 {% endfor %}
 </table>
 
-{% endblock %}
+</body>
+</html>
