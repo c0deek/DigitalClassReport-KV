@@ -40,11 +40,11 @@ def generate_xl(data, teachers):
 								    color='121212'),
 					)
 
-	columns = "A B C D E F G H I J K".split(" ")
+	columns = "A B C D E F G H I J K L".split(" ")
 
-	sheet.merge_cells('A1:K2')
+	sheet.merge_cells('A1:L2')
 
-	sheet['A1'] = "Kendriya Vidyalaya No.2, Armapur, Kanpur\n E-Learning Class Completion Report"
+	sheet['A1'] = "Kendriya Vidyalaya No.2, Armapur, Kanpur\n E-Learning Class Completion Report by HM"
 	
 	sheet['A3'] = "Date"
 	sheet['B3'] = "Name of the Teacher"
@@ -56,7 +56,8 @@ def generate_xl(data, teachers):
 	sheet['H3'] = "Topic"
 	sheet['I3'] = "Platform Used"
 	sheet['J3'] = "Homework"
-	sheet['K3'] = "Remarks"
+	sheet['K3'] = "Observation"
+	sheet['L3'] = "Remarks"
 
 	i = 3
 	for entry in data:
