@@ -1,6 +1,6 @@
 db.sqlite3
 migrations/
 media/
-.swp
-.swo
-__pycache__
+*.swp
+*.swo
+*__pycache__
