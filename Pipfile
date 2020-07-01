@@ -10,6 +10,7 @@ django = "==3.0"
 openpyxl = "*"
 pillow = "*"
 djangorestframework = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"
