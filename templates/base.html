@@ -11,8 +11,13 @@
     <header>
         <nav>
             <a href="{% url 'home' %}">Home</a>
-            <a href="{% url 'submit_report' %}">Submit Report</a>
-            <a href="{% url 'report_home' %}">View Report</a>
+            <a href="{% url 'submit_report' %}">Submit</a>
+            <a href="{% url 'report_home' %}">View</a>
+            {% if user.is_authenticated %}
+                <a href="/accounts/logout">Logout</a>
+            {% else %}
+                <a href="/accounts/login">Login</a>
+            {% endif %}
         </nav>
     </header>
 

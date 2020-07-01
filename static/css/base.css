@@ -103,17 +103,51 @@ tr:nth-child(even) {
 
 #report-header {
     display:flex;
+    margin-bottom: 2vh;
 }
 
 #report-header a {
+    width: 20vw;
+}
+
+#report-header img {
+    width: 100px;
+    height: 100px;
+    margin: 1vw 5vw;
+    text-align: center;
+}
+
+#report-header div {
+    display: flex;
+    width: 50vw;
+    text-align: center;
     margin: auto;
 }
 
-#report-header h1 {
-    width: 50vw;
-    text-align: center;  
+#report-header div h1 span {
+    font-size: 20px;
 }
 
 #report-header a {
+    color: black;
+    width: 20vw;
+    margin: auto;
+    text-align: center;
+}
+
+#edit-review {
+    color: black;
+    padding: 0;
+}
+
+form a {
+    color: black;
+}
+
+#review-edit-form {
+    margin-left: 42%;
+}
+
+#review-edit-form a {
     color: black;
 }

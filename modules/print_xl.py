@@ -44,7 +44,7 @@ def generate_xl(data, teachers):
 
 	sheet.merge_cells('A1:L2')
 
-	sheet['A1'] = "Kendriya Vidyalaya No.2, Armapur, Kanpur\n E-Learning Class Completion Report by HM"
+	sheet['A1'] = "Kendriya Vidyalaya No.2, Armapur, Kanpur\n E-Learning Class Completion Report"
 	
 	sheet['A3'] = "Date"
 	sheet['B3'] = "Name of the Teacher"
@@ -72,7 +72,9 @@ def generate_xl(data, teachers):
 		sheet['H'+str(i)] = entry["fields"]['topic']
 		sheet['I'+str(i)] = entry["fields"]['platform']
 		sheet['J'+str(i)] = entry["fields"]['homework']
-		sheet['J'+str(i)] = entry["fields"]['homework']
+		sheet['K'+str(i)] = entry["fields"]['observation']
+		sheet['K'+str(i)] = entry["fields"]['remark']
+
 
 	for col in range(1, len(columns)+1):
 		sheet.column_dimensions[columns[col-1]].width = 11

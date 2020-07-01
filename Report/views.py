@@ -11,6 +11,7 @@ import datetime
 import os
 
 from .models import Teacher, Record
+from .forms import DateForm, EditReviewForm
 
 #Create your views here.
 class HomePageView(TemplateView):
@@ -39,15 +40,16 @@ class SubmitSuccessView(TemplateView):
 class ReportPageView(TemplateView):
     template_name = 'report_home.html'
 
-class DateForm(forms.Form):
-    date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-
 def report_view(request):
     report_date = request.GET.get('date', '')
+    designation = request.GET.get('designation', '')
     if(report_date):
-        data = list(Record.objects.filter(date = report_date))
-        print(data)
-        return render(request, 'report_show.html', {'data': data})
+        if(designation == "all"):
+            data = list(Record.objects.filter(date = report_date))
+        else:
+            data = list(Record.objects.filter(date = report_date, teacher__designation__contains = designation))
+
+        return render(request, 'report_show.html', {'data': data,})
     else:
         form = DateForm()
         return render(request, 'report_home.html', {'form': form})
@@ -71,3 +73,19 @@ def download_report(request, year, month, day):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
     raise Http404
+
+def edit_review(request, pk):
+    entry = Record.objects.get(id = pk)
+    form = EditReviewForm()
+    date = str(entry.date)
+
+    if(request.method == 'POST'):
+        observation = request.POST['observation']
+        remark = request.POST['remark']
+        entry.observation = observation
+        entry.remark = remark
+        entry.save()
+        return redirect(f'/report/?date={date}')
+        return redirect('download_report', date[:4], date[5:7], date[8:])
+        
+    return render(request, 'edit_review.html', {'entry': entry, 'form': form})

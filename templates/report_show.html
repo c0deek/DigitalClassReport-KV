@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,10 @@
 {% with data|first as first %}
 <div id = "report-header">
     <a href="/report/download/{{ first.date|date:"Y/m/d" }}"><button>Download Excel</button></a>
-    <h1>Kendriya Vidyalaya No.2 Armapur<br>Digital Class Completion Report: {{ first.date }}</h1>
+    <div>
+        <img class="main-logo" src="https://1.bp.blogspot.com/-Y2Mqj01Rx7o/WIQaMix1MjI/AAAAAAAAFAY/HnvQGqbnbjMBeYINyo_c3fClBvZPPvv9ACLcB/s1600/kvs-logo.png" alt="logo">
+        <h1>Kendriya Vidyalaya No.2 Armapur<br><span>Digital Class Completion Report: {{ first.date }}</span></h1>
+    </div>
     <a href="{% url 'report_home' %}"><i class="fa fa-times" aria-hidden="true"></i></a>
 </div>
 {% endwith %}
@@ -21,24 +25,35 @@
         <th>Class</th>
         <th>Section</th>
         <th>Teacher</th>
+        <th>Designation</th>
         <th>Subject</th>
         <th>Total Students</th>
         <th>Present</th>
+        <th>Absent</th>
         <th>Platform</th>
         <th>Topic</th>
         <th>Homework</th>
+        <th>Observation</th>
+        <th>Remark</th>
     </tr>
 {% for entry in data %} 
     <tr>
         <td>{{ entry.Class }}</td>
         <td>{{ entry.section }}</td>
         <td>{{ entry.teacher }}</td>
+        <td>{{ entry.teacher.designation }}</td>
         <td>{{ entry.subject }}</td>
         <td>{{ entry.total_students }}</td>
         <td>{{ entry.present }}</td>
+        <td>{{ entry.total_students| subtract:entry.present }}</td>
         <td>{{ entry.platform }}</td>
         <td>{{ entry.topic }}</td>
         <td>{{ entry.homework }}</td>
+        <td>{{ entry.observation }}</td>
+        <td>{{ entry.remark }}</td>
+        {% if user.is_authenticated %}
+            <td id="edit-review"><a href="{{ entry.pk }}"><button>Edit</button></a></td>
+        {% endif %}
     </tr>
 {% endfor %}
 </table>
