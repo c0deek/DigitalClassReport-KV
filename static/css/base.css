@@ -83,6 +83,7 @@ table {
     width: 96%;
     margin: 0 2%;
     text-align: center;
+    font-size: 0.8rem;
 }
 
 th {
@@ -111,21 +112,26 @@ tr:nth-child(even) {
 }
 
 #report-header img {
-    width: 100px;
-    height: 100px;
-    margin: 1vw 5vw;
+    width: 60px;
+    height: 50px;
+    margin: 1vw 5vw 0vw 15vw;
     text-align: center;
 }
 
 #report-header div {
     display: flex;
-    width: 50vw;
+    width: 60vw;
     text-align: center;
     margin: auto;
 }
 
+#report-header div h1 {
+    font-size: 1.25rem;
+    margin-top: 1vw;
+}
+
 #report-header div h1 span {
-    font-size: 20px;
+    font-size: 1rem;
 }
 
 #report-header a {

@@ -46,27 +46,37 @@ def report_view(request):
     if(report_date):
         if(designation == "all"):
             data = list(Record.objects.filter(date = report_date))
+            all = True
         else:
             data = list(Record.objects.filter(date = report_date, teacher__designation__contains = designation))
+            all = False
 
-        return render(request, 'report_show.html', {'data': data,})
+        return render(request, 'report_show.html', {'data': data, 'all': all})
     else:
         form = DateForm()
         return render(request, 'report_home.html', {'form': form})
 
 
-def download_report(request, year, month, day):
+def download_report(request, year, month, day, slug):
     date = datetime.date(int(year), int(month), int(day))
     data = list(Record.objects.filter(date = date))
-    for entry in data:
-        print(entry)
+    
+    if(slug != 'all'):
+        data_json = serializers.serialize('json', Record.objects.filter(date = date, teacher__designation = slug))
+    else:
+        data_json = serializers.serialize('json', Record.objects.filter(date = date))
 
-    data_json = serializers.serialize('json', Record.objects.filter(date = date))
+    print(data_json)
+    
     teachers_json = serializers.serialize('json', Teacher.objects.all())
+
+    file_path = os.path.join(settings.MEDIA_ROOT, 'report.xlsx')
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
     print_xl.generate_xl(data_json, teachers_json)
 
 
-    file_path = os.path.join(settings.MEDIA_ROOT, 'report.xlsx')
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
@@ -74,7 +84,7 @@ def download_report(request, year, month, day):
             return response
     raise Http404
 
-def edit_review(request, pk):
+def edit_review(request, designation,  pk):
     entry = Record.objects.get(id = pk)
     form = EditReviewForm()
     date = str(entry.date)
@@ -84,8 +94,9 @@ def edit_review(request, pk):
         remark = request.POST['remark']
         entry.observation = observation
         entry.remark = remark
+        entry.observed_by = request.user.username
         entry.save()
         return redirect(f'/report/?date={date}')
-        return redirect('download_report', date[:4], date[5:7], date[8:])
+        return redirect('download_report', date[:4], date[5:7], date[8:], designation)
         
     return render(request, 'edit_review.html', {'entry': entry, 'form': form})
