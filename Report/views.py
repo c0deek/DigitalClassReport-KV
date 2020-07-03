@@ -70,7 +70,7 @@ def download_report(request, year, month, day, slug):
     
     teachers_json = serializers.serialize('json', Teacher.objects.all())
 
-    file_path = os.path.join(settings.BASE_DIR, '/modules/report.xlsx')
+    file_path = os.path.join(settings.MEDIA_ROOT, '/modules/report.xlsx')
     if os.path.exists(file_path):
         os.remove(file_path)
 
