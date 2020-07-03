@@ -118,4 +118,4 @@ def generate_xl(data, teachers):
 			cell.border = border
 
 			
-	wb.save(filename = os.path.join(settings.MEDIA_ROOT, 'report.xlsx'))
+	wb.save(filename = './media/report.xlsx')
