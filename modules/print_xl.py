@@ -1,11 +1,13 @@
 import openpyxl
 import datetime
 import json
+import os
 
 from openpyxl import Workbook
 from openpyxl.drawing.image import Image
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Font
 
+from django.conf import settings
 
 def generate_xl(data, teachers):
 
@@ -116,4 +118,4 @@ def generate_xl(data, teachers):
 			cell.border = border
 
 			
-	wb.save(filename = f'./media/report.xlsx')
+	wb.save(filename = os.path.join(settings.MEDIA_ROOT, 'report.xlsx'))
