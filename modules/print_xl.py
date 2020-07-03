@@ -14,7 +14,7 @@ def generate_xl(data, teachers):
 	# parse data and teachers
 	data = json.loads(data)
 	teachers = json.loads(teachers)
-	
+
 	wb = Workbook()
 
 	sheet = wb.active
@@ -43,7 +43,7 @@ def generate_xl(data, teachers):
 								  color='121212'),
 								  
 					bottom=Side(border_style='thin',
-								    color='121212'),
+									color='121212'),
 					)
 
 	columns = "A B C D E F G H I J K L".split(" ")
@@ -51,7 +51,7 @@ def generate_xl(data, teachers):
 	sheet.merge_cells('A1:L2')
 
 	sheet['A1'] = f'Kendriya Vidyalaya No.2, Armapur, Kanpur\n E-Learning Class Completion Report Date: {data[0]["fields"]["date"][5:] + "-" + data[0]["fields"]["date"][:4]}'
-	
+
 	sheet['A3'] = "Name of the Teacher"
 	sheet['B3'] = "Class"
 	sheet['C3'] = "Subject"
@@ -89,36 +89,36 @@ def generate_xl(data, teachers):
 		sheet['L'+str(i)] = entry["fields"]['observed_by']
 
 
-        for col in range(1, len(columns)+1):
-            sheet.column_dimensions['A'].width = 15
-            sheet.column_dimensions['B'].width = 5
-            sheet.column_dimensions['C'].width = 10
-            sheet.column_dimensions['D'].width = 9
-            sheet.column_dimensions['E'].width = 6
-            sheet.column_dimensions['F'].width = 6
-            sheet.column_dimensions['G'].width = 12
-            sheet.column_dimensions['H'].width = 16
-            sheet.column_dimensions['I'].width = 13
-            sheet.column_dimensions['L'].width = 14
-            sheet.column_dimensions['J'].width = 9
-            sheet.column_dimensions['K'].width = 12
-            sheet.column_dimensions['L'].width = 8
+		for col in range(1, len(columns)+1):
+			sheet.column_dimensions['A'].width = 15
+			sheet.column_dimensions['B'].width = 5
+			sheet.column_dimensions['C'].width = 10
+			sheet.column_dimensions['D'].width = 9
+			sheet.column_dimensions['E'].width = 6
+			sheet.column_dimensions['F'].width = 6
+			sheet.column_dimensions['G'].width = 12
+			sheet.column_dimensions['H'].width = 16
+			sheet.column_dimensions['I'].width = 13
+			sheet.column_dimensions['L'].width = 14
+			sheet.column_dimensions['J'].width = 9
+			sheet.column_dimensions['K'].width = 12
+			sheet.column_dimensions['L'].width = 8
             
-            for row in range(1, 4 + len(data)):
-                cell = sheet.cell(row = row, column = col)
-                if(row == 1):
-                    cell.font = fontH
-                    sheet.row_dimensions[row].height = 25
-                
-                elif(row == 3):
-                    cell.font = fontT
-			
-                else:
-                    cell.font = fontD
-			
-                    cell.alignment = align
-                    cell.border = border
+			for row in range(1, 4 + len(data)):
+				cell = sheet.cell(row = row, column = col)
+				if(row == 1):
+					cell.font = fontH
+					sheet.row_dimensions[row].height = 25
+				
+				elif(row == 3):
+					cell.font = fontT
+
+				else:
+					cell.font = fontD
+
+					cell.alignment = align
+					cell.border = border
 	
-        file_path = os.path.join(settings.MEDIA_ROOT, 'report.xlsx')
-        print("Excel Creater", file_path)
-        wb.save(filename = file_path)
+		file_path = os.path.join(settings.MEDIA_ROOT, 'report.xlsx')
+		print("Excel Creater", file_path)
+		wb.save(filename = file_path)
