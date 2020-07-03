@@ -117,6 +117,6 @@ def generate_xl(data, teachers):
 			cell.alignment = align
 			cell.border = border
 	
-        file_path = os.path.join(settings.MEDIA_ROOT, 'report.xlsx')
-        print("Excel Creater", file_path)
+    file_path = os.path.join(settings.MEDIA_ROOT, 'report.xlsx')
+    print("Excel Creater", file_path)
 	wb.save(filename = file_path)
