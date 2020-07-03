@@ -66,7 +66,14 @@ def generate_xl(data, teachers):
 	i = 3
 	for entry in data:
 		i += 1
-		sheet['A'+str(i)] = teachers[entry["fields"]['teacher']-1]["fields"]["name"]
+		teacher_pk = entry["fields"]['teacher']
+		for teacher_entry in teachers:
+			if(teacher_entry["pk"] == teacher_pk):
+				teacher_pk = teacher_entry["fields"]["name"]
+				break;
+				
+				
+		sheet['A'+str(i)] = teacher_pk
 		sheet['B'+str(i)] = str(entry["fields"]['Class']) + " " + entry["fields"]['section']
 		sheet['C'+str(i)] = entry["fields"]['subject']
 		sheet['D'+str(i)] = entry["fields"]['total_students']
