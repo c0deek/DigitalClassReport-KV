@@ -64,7 +64,7 @@ def download_report(request, year, month, day, slug):
     if(slug != 'all'):
         data_json = serializers.serialize('json', Record.objects.filter(date = date, teacher__designation = slug))
     else:
-        data_json = serializers.serialize('json', Record.objects.filter(date = date)
+        data_json = serializers.serialize('json', Record.objects.filter(date = date))
     
     teachers_json = serializers.serialize('json', Teacher.objects.all())
 
