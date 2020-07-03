@@ -59,8 +59,8 @@ def report_view(request):
 
 def download_report(request, year, month, day, slug):
     date = datetime.date(int(year), int(month), int(day))
-    data = list(Record.objects.filter(date = date))
-    
+    data = list(Record.objects.filter(date = date))  
+
     if(slug != 'all'):
         data_json = serializers.serialize('json', Record.objects.filter(date = date, teacher__designation = slug))
     else:
@@ -96,7 +96,7 @@ def edit_review(request, designation,  pk):
         entry.remark = remark
         entry.observed_by = request.user.username
         entry.save()
-        return redirect(f'/report/?date={date}')
+        return redirect(f'/report/?date={date}&designation={designation}')
         return redirect('download_report', date[:4], date[5:7], date[8:], designation)
         
     return render(request, 'edit_review.html', {'entry': entry, 'form': form})

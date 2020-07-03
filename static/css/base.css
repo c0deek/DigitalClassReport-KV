@@ -60,12 +60,12 @@ nav a {
 }
 
 form {
-    padding-left: 42%;
+    padding-left: 35%;
 }
 
 form label {
     display: inline-block;
-    width: 5vw;
+    width: 15vw;
 }
 
 form input {

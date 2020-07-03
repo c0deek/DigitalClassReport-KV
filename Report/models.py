@@ -9,6 +9,9 @@ DESIGNATIONS = [
     ("PGT", "PGT"),
     ("HM", "HM"),
     ("VP", "VP"),
+    ("Principal", "Principal"),
+    ("LIB", "Librarian"),
+    ("Lab Assistant", "Lab Assistant"),
 ]
 
 OBSERVATIONS = [
@@ -73,24 +76,27 @@ SUBJECTS = [
 
 PLATFORMS = [
     ("Zoom", "Zoom"),
+    ("JioMeet", "JioMeet"),
     ("Google Meet", "Google Meet"),
     ("WhatsApp", "WhatsApp"),
     ("MS Teams", "MS Teams"),
     ("Zoom + WhatsApp", "Zoom + WhatsApp"),
+    ("JioMeet + WhatsApp", "JioMeet + WhatsApp"),
     ("Google Meet + WhatsApp", "Google Meet + Whatsapp"),
     ("Other", "Other"),
 ]
 
 class Teacher(models.Model):
     name = models.CharField(max_length = 30, unique = True)
-    designation = models.CharField(max_length = 3, choices = DESIGNATIONS)
+    designation = models.CharField(max_length = 20, choices = DESIGNATIONS)
+    employee_code = models.IntegerField(default = 0, blank = True)
 
     def __str__(self):
         return self.name
 
 class Record(models.Model):
     Class = models.CharField(default = "I", max_length = 4, choices = CLASS_ROMANS)
-    teacher = models.ForeignKey(Teacher, on_delete = models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete = models.CASCADE, verbose_name= 'Name of the Teacher')
     section = models.CharField(max_length = 1, choices = SECTIONS)
     subject = models.CharField(max_length = 30, choices = SUBJECTS)
     total_students = models.IntegerField(default = 0)
