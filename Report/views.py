@@ -64,19 +64,17 @@ def download_report(request, year, month, day, slug):
     if(slug != 'all'):
         data_json = serializers.serialize('json', Record.objects.filter(date = date, teacher__designation = slug))
     else:
-        data_json = serializers.serialize('json', Record.objects.filter(date = date))
-
-    print(data_json)
+        data_json = serializers.serialize('json', Record.objects.filter(date = date)
     
     teachers_json = serializers.serialize('json', Teacher.objects.all())
 
-    file_path = os.path.join(settings.MEDIA_ROOT, '/modules/report.xlsx')
+    file_path = os.path.join(settings.MEDIA_ROOT, 'report.xlsx')
     if os.path.exists(file_path):
         os.remove(file_path)
 
     print_xl.generate_xl(data_json, teachers_json)
 
-
+    print("FROM VIEW", file_path)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
