@@ -50,7 +50,7 @@ def generate_xl(data, teachers):
 
 	sheet.merge_cells('A1:L2')
 
-	sheet['A1'] = f'Kendriya Vidyalaya No.2, Armapur, Kanpur\n E-Learning Class Completion Report Date: {data[0]["fields"]["date"][8:] + "-" + data[0]["fields"]["date"][5:7] + data[0]["fields"]["date"][:4]}'
+	sheet['A1'] = f'Kendriya Vidyalaya No.2, Armapur, Kanpur\n E-Learning Class Completion Report Date: {data[0]["fields"]["date"][8:] + "-" + data[0]["fields"]["date"][5:7] + "-" + data[0]["fields"]["date"][:4]}'
 
 	sheet['A3'] = "Name of the Teacher"
 	sheet['B3'] = "Class"
